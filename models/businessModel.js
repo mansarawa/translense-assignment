@@ -30,12 +30,10 @@ const businessSchema = new mongoose.Schema({
         minlength: [5, "Address must be at least 5 characters long"]
     },
     openingTime: {
-        type: String,
-        
+        type: String,        
     },
     closingTime: {
         type: String,
-        
     },
     email: {
         type: String,

@@ -31,10 +31,10 @@ export const createBusinessController = async (req, res) => {
                 return res.status(400).json({ data: encryptedData });
             }
 
-            const { businessName, country, state, city, address, email, mobileNumber } = req.body;
+            const { businessName, country, state, city, address, email, mobileNumber,openingTime,closingTime } = req.body;
 
            
-            if (!businessName || !country || !state || !city || !address || !email || !mobileNumber) {
+            if (!businessName || !country || !state || !city || !address || !email || !mobileNumber || !openingTime || !closingTime) {
                 const encryptedData = await encryptData(JSON.stringify({ message: "All fields are required!", success: false }));
                 return res.status(400).json({ data: encryptedData });
             }
@@ -47,6 +47,8 @@ export const createBusinessController = async (req, res) => {
                 address,
                 email,
                 mobileNumber,
+                openingTime,
+                closingTime,
                 image: req.file ? req.file.path : null 
             });
 
