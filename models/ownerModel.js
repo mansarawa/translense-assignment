@@ -14,13 +14,6 @@ const ownerSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String, 
-        required: [true, "Profile picture is required"],
-        validate: {
-            validator: function (value) {
-                return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i.test(value);
-            },
-            message: "Invalid image URL format"
-        }
     },
     country: {
         type: String,

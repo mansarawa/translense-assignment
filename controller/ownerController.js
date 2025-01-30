@@ -9,12 +9,13 @@ export const createOwnerController = async (req, res) => {
     
         upload(req, res, async (err) => {
             if (err) {
+                console.log(err)
                 const encryptedData = await encryptData(JSON.stringify({ message: err.message, success: false }));
                 return res.status(400).json({ data: encryptedData });
             }
 
-            const {businessId, fullName, country, state, city, address, email, mobileNumber } = req.body;
-
+            const {businessId, fullName, country, state, city, address, email, mobileNumber, } = req.body;
+            console.log(req.body)
             
             if (!businessId || !fullName || !country || !state || !city || !address || !email || !mobileNumber) {
                 const encryptedData = await encryptData(JSON.stringify({ message: "All fields are required!", success: false }));
@@ -43,10 +44,11 @@ export const createOwnerController = async (req, res) => {
     } catch (error) {
         if (error.name === "ValidationError") {
             const errors = Object.values(error.errors).map(err => err.message);
+            console.log(errors)
             const encryptedData = await encryptData(JSON.stringify({ message: errors, success: false }));
             return res.status(400).json({ data: encryptedData });
         }
-
+        console.log(error.message)
         const encryptedData = await encryptData(JSON.stringify({ message: "Server Error", success: false }));
         res.status(500).json({ data: encryptedData });
     }
